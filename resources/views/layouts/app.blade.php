@@ -24,7 +24,7 @@
         ]) !!};
     </script>
 </head>
-<body>
+<body style="background-color: #ffffff;">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
