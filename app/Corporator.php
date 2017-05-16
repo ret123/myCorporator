@@ -16,4 +16,8 @@ class Corporator extends Model
     public function area() {
       return $this->belongsTo('App\Area');
     }
+
+    public function tickets() {
+      return $this->hasMany(Ticket::class);
+    }
 }

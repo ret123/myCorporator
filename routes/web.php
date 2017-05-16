@@ -17,10 +17,11 @@ Route::get('/', 'Corporators@home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'Corporators@home');
 Route::get('corporators/{corporator_id}','Corporators@show');
 Route::get('/search','Corporators@search');
-
+Route::get('new_ticket/{corporator_id}','TicketsController@create');
+Route::post('new_ticket', 'TicketsController@store');
 /*
 Route::get('/ward/{id}/area',function($id){
 $ward=Ward::find($id);

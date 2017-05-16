@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Corporator;
 use App\Ward;
 use App\Area;
+use App\Ticket;
 
 class Corporators extends Controller
 {
@@ -21,7 +22,8 @@ class Corporators extends Controller
       $corporator=Corporator::where('id',$corporator_id)->firstOrFail();
       $ward=$corporator->ward;
       $area=$corporator->area;
-      return view('corporators.show',compact('corporator','ward','area'));
+      $tickets=$corporator->tickets;
+      return view('corporators.show',compact('corporator','ward','area','tickets'));
 
     }
 
