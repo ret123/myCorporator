@@ -22,6 +22,7 @@ Route::get('corporators/{corporator_id}','Corporators@show');
 Route::get('/search','Corporators@search');
 Route::get('new_ticket/{corporator_id}','TicketsController@create');
 Route::post('new_ticket', 'TicketsController@store');
+Route::post('new_ticket/verify','TicketsController@verify');
 /*
 Route::get('/ward/{id}/area',function($id){
 $ward=Ward::find($id);
