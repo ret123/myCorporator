@@ -8,8 +8,10 @@ class EndUser extends Model
 {
     public $table = 'end_users';
 
+    protected $guarded = ['pin'];
+
     protected $fillable= [
-      'name','email','phone','address','pin','verified'
+      'name','email','phone','address','verified','pin','otp_count',
     ];
 
     public function tickets() {
@@ -20,6 +22,7 @@ class EndUser extends Model
         return $this->hasMany(Token::class);
     }
 
+
     public function sendOTP() {
     $nexmo = app('Nexmo\Client');
     $message = $nexmo->message()->send([
@@ -28,5 +31,6 @@ class EndUser extends Model
         'text' => 'Your OTP is '.$this->pin
     ]);
   }
+
 
 }

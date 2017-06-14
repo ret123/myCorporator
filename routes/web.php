@@ -16,13 +16,26 @@ use App\Corporator;
 Route::get('/', 'Corporators@home');
 
 Auth::routes();
+Route::get('new_ticket/resend','TicketsController@resendOtp');
+Route::get('new_ticket/verify',function(){
+  return view('tickets.verify');
+});
+
+Route::post('new_ticket/verify',[
+  //'middleware' => 'pin',
+  'as' => 'tickets.verify',
+  'uses' => 'TicketsController@verify',
+]);
+
 
 Route::get('/home', 'Corporators@home');
 Route::get('corporators/{corporator_id}','Corporators@show');
 Route::get('/search','Corporators@search');
 Route::get('new_ticket/{corporator_id}','TicketsController@create');
 Route::post('new_ticket', 'TicketsController@store');
-Route::post('new_ticket/verify','TicketsController@verify');
+Route::get('ticket/{id}','TicketsController@showTicket');
+
+
 /*
 Route::get('/ward/{id}/area',function($id){
 $ward=Ward::find($id);
@@ -68,3 +81,4 @@ Route::get('/areas',function(){
     echo $ward->name;
   }
 });
+*/

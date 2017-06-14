@@ -11,7 +11,7 @@
 
 
 
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
       @foreach ($wards as $ward)
       <div class="panel-heading">
         <h4>Ward No. {{ $ward->id }} - {{ $ward->name }}</h4>

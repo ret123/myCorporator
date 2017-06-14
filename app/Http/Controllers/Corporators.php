@@ -29,7 +29,7 @@ class Corporators extends Controller
 
     public function search(Request $request) {
       $search = $request->search;
-      $corporators =Corporator::with('ward','area')->where('name','LIKE',"%$search%")->paginate(5);
+      $corporators =Corporator::with('ward','area')->where('name','LIKE',"%$search%")->paginate(4);
       return response()->json([
         'model' => $corporators
       ]);

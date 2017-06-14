@@ -10,6 +10,43 @@
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
+.chip {
+    display: inline-block;
+    height: 32px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(0,0,0,0.6);
+    line-height: 32px;
+    padding: 0 12px;
+    border-radius: 16px;
+    background-color: #e4e4e4;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+.chip>img {
+    float: left;
+    margin: 0 8px 0 -12px;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+}
+
+.hide {
+  display:none;
+}
+@media (min-width: 768px) {
+i.material-icons {
+  font-size: 40px;
+ }
+}
+
+input:-webkit-autofill,
+ input:-webkit-autofill:hover,
+ input:-webkit-autofill:focus,
+ input:-webkit-autofill:active {
+ -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  }
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
