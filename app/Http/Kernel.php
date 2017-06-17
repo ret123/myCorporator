@@ -58,5 +58,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'pin' => \App\Http\Middleware\PinVerification::class,
+        'corporator' => \App\Http\Middleware\CorporatorMiddleware::class,
     ];
 }

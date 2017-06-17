@@ -9,6 +9,7 @@ use App\Ticket;
 use App\Ward;
 use App\Area;
 use App\EndUser;
+use App\Worker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -110,7 +111,10 @@ class TicketsController extends Controller
            //$request->input('status'),
         ]);
             $end_user->verified = "1";
+            $end_user->ticket_id=$ticket->id;
             $end_user->save();
+            $ticket->end_user_id=$end_user->id;
+            $ticket->save();
             Session::flush();
             return redirect()->action('Corporators@show',[$corporator_id])->with("msg" , "A ticket with ID: $ticket->ticket_id has been created.");
 
@@ -155,6 +159,64 @@ class TicketsController extends Controller
 
  public function showTicket($id) {
    $ticket=Ticket::where('id',$id)->firstOrFail();
+   $end_user=$ticket->end_user;
+   $corporator=$ticket->corporator;
+   $user=Auth::user();
+   $worker=Worker::where('ticket_id',$ticket->id)->first();
+
+   //dd($count);
+
+ if($worker) {
+    return view('tickets.show-worker',compact('ticket','end_user','corporator','user','worker'));
  }
+ else {
+    return view('tickets.show',compact('ticket','end_user','corporator','user'));
+ }
+
+
+ }
+
+  public function close($ticket_id) {
+
+    $ticket = Ticket::where('id', $ticket_id)->firstOrFail();
+    $corporator_id=$ticket->corporator;
+    if($ticket->status !== 'Closed') {
+    $ticket->status = 'Closed';
+    $ticket->save();
+     return redirect()->action('Corporators@show',[$corporator_id])->with("status", "The ticket with ID:$ticket->ticket_id has been closed.");
+  }
+  else {
+     return redirect()->action('Corporators@show',[$corporator_id])->with("err", "The ticket with ID:$ticket->ticket_id has already been closed.");
+  }
+}
+
+public function assign($ticket_id) {
+  $ticket = Ticket::where('id', $ticket_id)->firstOrFail();
+  $corporator=$ticket->corporator;
+  $end_user= $ticket->end_user;
+  return view('tickets.assign',compact('ticket','corporator','end_user'));
+}
+
+public function saveAssign($ticket_id,Request $request) {
+  $ticket=Ticket::where('id',$ticket_id)->firstOrFail();
+  $corporator_id=$request->corporator_id;
+  $this->validate($request, [
+      'name' => 'required',
+      'status' => 'required',
+      'message' => 'required',
+      'phone'  => 'required',
+      'priority' => 'required',
+  ]);
+  $worker = Worker::create([
+    'ticket_id' => $ticket->id,
+    'corporator_id' => $corporator_id,
+    'name' => $request->input('name'),
+    'status' => $request->input('status'),
+    'reply' => $request->input('message'),
+    'phone' => $request->input('phone'),
+    'priority' => $request->input('priority'),
+  ]);
+ return redirect()->action('TicketsController@showTicket',[$ticket->id])->with("msg", "The ticket with ID:$ticket->ticket_id has been assigned to our worker for resolution.");
+}
 
 } //end of controller

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnEndUserIdToTicketsTable extends Migration
+class AddColumnSubscriptionToCorporatorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddColumnEndUserIdToTicketsTable extends Migration
      */
     public function up()
     {
-        Schema::table('tickets', function(Blueprint $table){
-          $table->integer('end_user_id')->unsigned()->after('user_id');
-        });
+      Schema::table('corporators', function(Blueprint $table){
+        $table->integer('subscribe')->unsigned()->default(0)->after('user_id');
+      });
     }
 
     /**
@@ -25,8 +25,8 @@ class AddColumnEndUserIdToTicketsTable extends Migration
      */
     public function down()
     {
-      Schema::table('tickets', function(Blueprint $table){
-        $table->dropColumn('end_user_id');
+      Schema::table('corporators', function(Blueprint $table){
+        $table->dropColumn('subscribe');
       });
     }
 }

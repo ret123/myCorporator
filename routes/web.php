@@ -35,6 +35,11 @@ Route::get('new_ticket/{corporator_id}','TicketsController@create');
 Route::post('new_ticket', 'TicketsController@store');
 Route::get('ticket/{id}','TicketsController@showTicket');
 
+Route::group(['prefix' => 'admin', 'middleware' => 'corporator'], function() {
+  Route::post('close_ticket/{ticket_id}','TicketsController@close');
+  Route::get('assign_ticket/{ticket_id}','TicketsController@assign');
+  Route::post('assign_ticket/{ticket_id}','TicketsController@saveAssign');
+});
 
 /*
 Route::get('/ward/{id}/area',function($id){

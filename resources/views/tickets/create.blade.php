@@ -21,7 +21,7 @@
                         </div>
                         <div class=" row form-group {{ $errors->has('title') ? ' has-error' : '' }} label-floating">
                           <div class="col-xs-1">
-                            <i class="material-icons ">subject</i>
+                            <i class="material-icons prefix">subject</i>
                           </div>
                           <div class="col-xs-11">
                             <label for="title" class="control-label">Subject</label>

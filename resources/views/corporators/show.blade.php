@@ -7,7 +7,7 @@
   <img src="/uploads/wards/{{$ward->id}}.png" alt="" class="img-responsive">
     <div class="row">
 
-        <div class="col-md-8">
+        <div class="col-md-7">
                   <div class="row">
                     <div class="col-md-6">
                         @include('includes.flash')
@@ -71,34 +71,65 @@
                         </div> -->
 
                   </div>
+                  @if($corporator->subscribe !==0)
                   <div class="row">
                     <a href="{{url('new_ticket/'.$corporator->id)}}" class="btn btn-raised btn-info" style="margin-left:35px;">Place a request</a>
                   </div>
+                  @endif
              </div> <!--col-md-8 ends here -->
-             @if ($tickets->isEmpty())
-                <div class="hide"></div>
-             @else
-              <div class="col-md-4">
-                <div class=" panel panel-primary">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Issue Raised</h3>
-                  </div>
+             <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-ticket"> Issues raised</i>
+                </div>
+
                 <div class="panel-body">
-                    <ul>
+                    @if ($tickets->isEmpty())
+                        <p>There is no issue raised yet.</p>
+                    @else
+                        <table class="table">
+                            <thead>
+                                <tr>
+
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                    <th>Created</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                       @foreach($tickets as $ticket)
+                              <tr>
 
+                                  <td>
 
-                      <li>  <div class="chip">
-                        <img src="/uploads/corporators/1-D.jpg" alt="Contact Person">
-                        user name
-                      </div><a href="{{url('ticket/'.$ticket->id)}}">{{$ticket->ticket_id}}</a></li>
+                      <a href="{{url('ticket/'.$ticket->id)}}"># {{$ticket->ticket_id}} - {{$ticket->title}}</a>
+                      </td>
+                                  <td>
+                                  @if ($ticket->status === 'Open')
+                                      <span class="label label-success">{{ $ticket->status }}</span>
+                                  @else
+                                      <span class="label label-danger">{{ $ticket->status }}</span>
+                                  @endif
+                                  </td>
+                                  <td>{{$ticket->priority}}</td>
+                                  <td>{{ $ticket->created_at->diffForHumans() }}</td>
+
+                              </tr>
                       @endforeach
-                    </ul>
+                    </tbody>
+                       </table>
+
+
+                   @endif
                 </div>
               </div>
+            </div>
+          </div>
 
-            </div> <!-- col-md-4 ends here -->
-            @endif
+
+
          </div>
     </div>
 

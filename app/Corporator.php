@@ -20,4 +20,12 @@ class Corporator extends Model
     public function tickets() {
       return $this->hasMany(Ticket::class);
     }
+
+    public function user() {
+      return $this->belongsTo(User::class);
+    }
+
+    public function workers() {
+      return $this->hasMany(Worker::class);
+    }
 }

@@ -10,6 +10,23 @@
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
+.panel.panel-custom>.panel-heading {
+    background-color: #90a4ae ;
+}
+
+.new-font {
+  font-size:18px;
+  font-weight:400;
+
+}
+.old-font {
+  font-size:18px;
+  font-weight:400px;
+  color:#009688;
+}
+.prefix {
+  margin-left:10px;
+}
 .chip {
     display: inline-block;
     height: 32px;
@@ -34,11 +51,7 @@
 .hide {
   display:none;
 }
-@media (min-width: 768px) {
-i.material-icons {
-  font-size: 40px;
- }
-}
+
 
 input:-webkit-autofill,
  input:-webkit-autofill:hover,
