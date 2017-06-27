@@ -35,9 +35,10 @@
                 </div>
               </div>
             </div> <!--panel ends here -->
-            <form  method="POST" action="{{url('admin/assign_ticket/'.$ticket->id)}}" >
+            <form  method="POST" action="{{url('admin/assign_ticket/')}}" >
                 {!! csrf_field() !!}
                 <input type="hidden" name="corporator_id" value="{{$corporator->id}}">
+                <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
                   <legend style="text-align:center;color:#00bfa5">Manage Issue</legend>
                 <div class="row">
                   <div class="col-xs-6">
@@ -59,23 +60,23 @@
                   </div>
                 </div> <!--col-xs-6 ends here -->
                 <div class="col-xs-6">
-                <div class=" form-group {{ $errors->has('phone') ? ' has-error' : '' }} label-floating">
+                <div class=" form-group {{ $errors->has('mobile') ? ' has-error' : '' }} label-floating">
                   <div class="col-xs-1">
                     <i class="material-icons prefix ">phone</i>
                   </div>
                     <div class="col-xs-11">
-                    <label for="phone" class="col-md-6 control-label" style="margin-left:100px">Mobile No</label>
+                    <label for="mobile" class="col-md-6 control-label" style="margin-left:100px">Mobile No</label>
                     <div class="row">
                     <div class="col-md-3 col-xs-2">
                         <input id="code" type="text" class="form-control" name="code" value="91" readonly>
                     </div>
                       <div class="col-md-9 col-xs-6">
-                      <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}">
+                      <input id="mobile" type="text" class="form-control" name="mobile" value="{{ old('mobile') }}">
 
 
-                        @if ($errors->has('phone'))
+                        @if ($errors->has('mobile'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('phone') }}</strong>
+                                <strong>{{ $errors->first('mobile') }}</strong>
                             </span>
                         @else
                         <p class="help-block">Kindly enter your 10 digits mobile number</p>
@@ -119,7 +120,7 @@
                   </div>
                   <div class="col-xs-11">
                     <label for="priority" class=" control-label">Priority</label>
-                        <select id="priority" type="" class="form-control" name="priority">
+                        <select id="priority"  class="form-control" name="priority">
                             <option value=""></option>
                             <option value="low">Low</option>
                             <option value="medium">Medium</option>

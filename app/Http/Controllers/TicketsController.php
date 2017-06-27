@@ -180,7 +180,7 @@ class TicketsController extends Controller
 
     $ticket = Ticket::where('id', $ticket_id)->firstOrFail();
     $corporator_id=$ticket->corporator;
-    if($ticket->status !== 'Closed') {
+    if($ticket->status != 'Closed') {
     $ticket->status = 'Closed';
     $ticket->save();
      return redirect()->action('Corporators@show',[$corporator_id])->with("status", "The ticket with ID:$ticket->ticket_id has been closed.");
@@ -197,26 +197,33 @@ public function assign($ticket_id) {
   return view('tickets.assign',compact('ticket','corporator','end_user'));
 }
 
-public function saveAssign($ticket_id,Request $request) {
+public function saveAssign(Request $request) {
+  $ticket_id=$request->ticket_id;
   $ticket=Ticket::where('id',$ticket_id)->firstOrFail();
+
   $corporator_id=$request->corporator_id;
+
   $this->validate($request, [
       'name' => 'required',
       'status' => 'required',
       'message' => 'required',
-      'phone'  => 'required',
+      'mobile'  => 'required',
       'priority' => 'required',
   ]);
-  $worker = Worker::create([
+
+  $worker = new Worker([
     'ticket_id' => $ticket->id,
     'corporator_id' => $corporator_id,
-    'name' => $request->input('name'),
+    'name' => $request->name,
+    'phone' => $request->input('mobile'),
     'status' => $request->input('status'),
     'reply' => $request->input('message'),
-    'phone' => $request->input('phone'),
-    'priority' => $request->input('priority'),
+    'priority' => $request->priority,
+
   ]);
- return redirect()->action('TicketsController@showTicket',[$ticket->id])->with("msg", "The ticket with ID:$ticket->ticket_id has been assigned to our worker for resolution.");
+  $worker->save();
+
+ return redirect()->action('TicketsController@showTicket',[$ticket->id])->with("msg", "The ticket with ID:$ticket->ticket_id has been assigned for resolution.");
 }
 
 } //end of controller

@@ -16,7 +16,7 @@ class CorporatorMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->is_corporator !==1 ) {
+        if (Auth::user()->is_corporator !=1 ) {
           return redirect('home');
         }
         return $next($request);

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Worker extends Model
 {
   protected $fillable = [
-      'name', 'reply', 'status','corporator_id','ticket_id',
+      'name', 'reply', 'status','corporator_id','ticket_id','priority','phone',
   ];
 
   public function corporator() {

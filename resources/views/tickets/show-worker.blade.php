@@ -95,19 +95,19 @@
                     <div class="row">
                         <i class="material-icons prefix ">security</i>
 
-                      @if ($ticket->status === 'progress')
-                        <span class="new-font">  Status at Corporators end:</span><span class="label label-primary">{{ $worker->status }}</span>
+                      @if ($worker->status == 'progress')
+                        <span class="new-font">  Status at Corporators end:</span><span class="label label-success">Work in {{ $worker->status }}</span>
                       @endif
-                      @if ($ticket->status === 'hold')
-                      <span class="new-font">  Status at Corporators end:</span> <span class="label label-warning">{{ $worker->status }}</span>
+                      @if ($worker->status == 'hold')
+                      <span class="new-font">  Status at Corporators end:</span> <span class="label label-warning">On hold {{ $worker->status }}</span>
                       @endif
-                      @if ($ticket->status === 'notapplicable')
+                      @if ($worker->status == 'notapplicable')
                       <span class="new-font">  Status at Corporators end:</span> <span class="label label-info">{{ $worker->status }}</span>
                       @endif
-                      @if ($ticket->status === 'resolved')
-                      <span class="new-font">   Status at Corporators end:</span> <span class="label label-success">{{ $worker->status }}</span>
+                      @if ($worker->status == 'resolved')
+                      <span class="new-font">   Status at Corporators end:</span> <span class="label label-primary">{{ $worker->status }}</span>
                       @endif
-                      @if ($ticket->status === 'closed')
+                      @if ($worker->status == 'closed')
                       <span class="new-font">   Status at Corporators end:</span> <span class="label label-danger">{{ $worker->status }}</span>
                       @endif
 

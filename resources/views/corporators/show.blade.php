@@ -6,7 +6,6 @@
 <div class="container-fluid">
   <img src="/uploads/wards/{{$ward->id}}.png" alt="" class="img-responsive">
     <div class="row">
-
         <div class="col-md-7">
                   <div class="row">
                     <div class="col-md-6">
@@ -71,7 +70,7 @@
                         </div> -->
 
                   </div>
-                  @if($corporator->subscribe !==0)
+                  @if($corporator->subscribe !=0)
                   <div class="row">
                     <a href="{{url('new_ticket/'.$corporator->id)}}" class="btn btn-raised btn-info" style="margin-left:35px;">Place a request</a>
                   </div>
@@ -91,8 +90,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-
-                                    <th>Title</th>
+                                    <th>Subject</th>
                                     <th>Status</th>
                                     <th>Priority</th>
                                     <th>Created</th>
@@ -101,13 +99,8 @@
                             <tbody>
                       @foreach($tickets as $ticket)
                               <tr>
-
-                                  <td>
-
-                      <a href="{{url('ticket/'.$ticket->id)}}"># {{$ticket->ticket_id}} - {{$ticket->title}}</a>
-                      </td>
-                                  <td>
-                                  @if ($ticket->status === 'Open')
+                                  <td><a href="{{url('ticket/'.$ticket->id)}}"> {{$ticket->title}}</a></td>
+                                  <td>@if ($ticket->status == 'Open')
                                       <span class="label label-success">{{ $ticket->status }}</span>
                                   @else
                                       <span class="label label-danger">{{ $ticket->status }}</span>
@@ -115,22 +108,16 @@
                                   </td>
                                   <td>{{$ticket->priority}}</td>
                                   <td>{{ $ticket->created_at->diffForHumans() }}</td>
-
                               </tr>
                       @endforeach
                     </tbody>
                        </table>
-
-
                    @endif
                 </div>
               </div>
             </div>
           </div>
-
-
-
          </div>
-    </div>
+    </div> <!--container-fluid -->
 
 @endsection

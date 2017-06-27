@@ -13,7 +13,10 @@
                 <div class="panel-body">
                     @include('includes.flash')
 
+
                     <div class="ticket-info">
+                      
+                      <!--checking progress bar -->
                       <div class="col-md-5">
                       <div class="row">
                         <i class="material-icons prefix ">account_circle</i>
@@ -51,7 +54,7 @@
                           <span class="new-font">Created:</span><span class="old-font">  {{ $ticket->created_at->diffForHumans() }}</span>
                         </div>
                               @if(Auth::check())
-                              @if($user->id == $corporator->user_id && $ticket->status !== 'Closed')
+                              @if($user->id == $corporator->user_id && $ticket->status == 'Open')
                               <form action="{{ url('admin/close_ticket/'.$ticket->id) }}" method="POST">
                                   {!! csrf_field() !!}
                                   <button type="submit" class="btn btn-danger btn-raised col-md-4 col-offset-3">Close</button>
@@ -79,7 +82,8 @@
                   <div class="col-md-4"> <!--ticket status at corporator side -->
                     <div class="row">
 
-                        <h4>Issue has been closed!</h4>
+                        <h5>Issue is still pending to be assign to appropriate person at the corporators side.Kindly come back again to check status of the raised issue.</h5b>
+                          <p>Thank you!</p>
                      </div>
                   </div>
                   <hr>
@@ -89,4 +93,5 @@
         </div>
     </div>
   </div>
+
 @endsection
