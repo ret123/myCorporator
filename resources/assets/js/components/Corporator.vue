@@ -1,5 +1,4 @@
 <template>
-
     <div class="form-group">
       <input  @keyup="fetchData()" type="text" name="search" id="search" class="form-control" v-model="search" placeholder="Search by Corporator's name"></input>
       <span></span>

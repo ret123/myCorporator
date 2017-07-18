@@ -14,7 +14,7 @@ class Corporators extends Controller
        $corporators =Corporator::all();
        $wards=Ward::paginate(5);
        $areas=Area::all();
-       return view('corporators.home',compact('corporators','wards','areas'));
+              return view('corporators.home',compact('corporators','wards','areas'));
     }
 
     public function show($corporator_id) {
